@@ -7,7 +7,7 @@ from hybrid_recommender import hybrid_recommender
 #-----------------------------------------
 # Data Loading
 #-----------------------------------------
-df = pd.read_csv('../data/eda_data.csv', index_col = 0)
+df = pd.read_csv('../data/final_data.csv', index_col = 0)
 
 cosine_sim = joblib.load('../model/cosine_similarity_matrix.joblib')
 
