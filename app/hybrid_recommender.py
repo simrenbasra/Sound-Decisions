@@ -14,6 +14,10 @@ def hybrid_recommender(df, filtered_df, similarities, alpha=0.6):
     - top_df: DataFrame of top recommended products
     """
 
+    # Check if filtered_df is empty
+    if filtered_df.empty:
+        return ('No products found matching your preferences. Please adjust filters.')
+    
     # Normalising the Rating field for calculation
     scaler = MinMaxScaler()
     df['Normalised Rating'] = scaler.fit_transform(df[['Rating']])
