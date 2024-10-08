@@ -9,7 +9,7 @@ from hybrid_recommender import hybrid_recommender
 #-----------------------------------------
 df = pd.read_csv('../data/eda_data.csv', index_col = 0)
 
-cosine_sim = joblib.load('../data/cosine_similarity_matrix.joblib')
+cosine_sim = joblib.load('../model/cosine_similarity_matrix.joblib')
 
 if 'product_feedback' not in st.session_state:
     st.session_state.product_feedback = []
