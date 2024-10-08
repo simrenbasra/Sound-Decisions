@@ -6,6 +6,9 @@
 .DS_Store
 *.pptx
 
+# Images for blog posts
+*.png
+
 # Python bytecode files
 __pycache__/
 *.pyc
