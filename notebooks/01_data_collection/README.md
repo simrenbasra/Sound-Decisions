@@ -7,7 +7,7 @@ This folder contains notebooks for data scraping and data cleaning/processing.
 
 ## Notebook Summaries
 
-### 1. Data Scrapinf [01-data-scraping.ipynb]
+### 1. Data Scraping [01-data-scraping.ipynb]
 
 The purpose of this notebook is to scrape 50 pages worth of headphone product data off Amazon: https://www.amazon.co.uk/s?keywords=adult+headphones&i=electronics. The script scrapes the following data from Amazon's search results using BeautifulSoup:
 
