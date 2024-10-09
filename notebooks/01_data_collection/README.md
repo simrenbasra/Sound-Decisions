@@ -5,7 +5,7 @@
 The aim of this project is to build a recommneder for headphones based off products listed on Amazon. 
 This folder contains notebooks for data scraping and data cleaning/processing.
 
-## Notebook Summaries
+## Notebook Order and Summaries
 
 ### 1. Data Scraping [01-data-scraping.ipynb]
 
@@ -25,7 +25,7 @@ This involves removing duplicated entries and rows with missing values, in addit
 
 ## Outcome
 
-After running these notebooks we have two data diles in CSV form:
+After running these notebooks we have two data files in CSV form:
 
 - scraped_data.csv : all porducts from 50 pages worth of scraping.
 - cleaned_data.csv : cleaned scraped data with extra features from feature extraction.
