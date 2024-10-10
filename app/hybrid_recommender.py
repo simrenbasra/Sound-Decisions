@@ -47,7 +47,7 @@ def hybrid_recommender(df, filtered_df, similarities, alpha=0.6):
     sim_df = sim_df[sim_df['Product ID'].isin(filtered_df['Product ID'])]
     
     # Filter and sort to get the top recommendations
-    top_df = sim_df.sort_values(by='Combined Similarity', ascending=False).head(6)
+    top_df = sim_df.sort_values(by='Combined Similarity', ascending=False).head(5)
     top_df.reset_index(drop=True, inplace=True)
 
     # Adding tags to make link clickable
