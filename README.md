@@ -65,7 +65,7 @@ For a more in-depth discussion of this project, including the challenges faced a
 
 [Sound Decisions: EDA 🔍](https://simrenbasra.github.io/simys-blog/2024/10/03/sound_decisions_part2.html)
 
-[Sound Decisions: Recommender System 🧩](https://simrenbasra.github.io/simys-blog/2024/10/11/sound_decisions_part3.html)
+[Sound Decisions: Recommender System 🧩](https://simrenbasra.github.io/simys-blog/2024/10/10/sound_decisions_part3.html)
 
 ## Challenges of the Project
 
