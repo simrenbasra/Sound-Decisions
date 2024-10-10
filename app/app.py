@@ -37,7 +37,15 @@ features = {
     "Microphone": st.checkbox("Microphone", value=False),
     "Foldable": st.checkbox("Foldable", value=False),
     "Over Ear": st.checkbox("Over-Ear", value=False),
+    "Gaming": st.checkbox("Gaming", value=False)
 }
+
+st.markdown("---")
+
+# Slider features
+# Tuple for min/max price range
+price_range = st.slider("Select Price Range (£)", min_value=df['Price'].min(), max_value=df['Price'].max(), step = 10.0, value=(0.0, df['Price'].max().round()))
+min_price_selected, max_price_selected = price_range  
 
 st.markdown("---")
 
@@ -46,14 +54,16 @@ rating = st.slider("Select Minimum Rating", min_value=1.0, max_value=5.0, value=
 
 st.markdown("---")
 
-battery_life = st.slider("Select Minimum Battery Life (hours)", min_value=0, max_value=100, value=10)
+battery_life = st.slider("Select Minimum Battery Life (hours)", min_value=df['Battery Life'].min(), max_value=df['Battery Life'].max(), value=10)
 
 st.markdown("---")
 
 # Multiselect features
 colour_columns = [colour_col for colour_col in df.columns if colour_col.startswith('Colour')]
 colour_names = [colour.replace('Colour_','') for colour in colour_columns]
-colours = st.multiselect("Select Color Preferences", options=colour_names, default='Not Specified')
+# Removing Not Specified as its confusing to users
+colour_names.remove('Not Specified')
+colours = st.multiselect('Select Colour Preferences', options=colour_names)
 
 st.markdown("---")
 #-----------------------------------------
@@ -65,6 +75,10 @@ for feature, selected in features.items():
     if selected:
         filtered_df = filtered_df.loc[filtered_df[feature]==1]
 
+# Filter by Price - need to take log of input price
+
+filtered_df = filtered_df.loc[(filtered_df['Price'] <= max_price_selected) & (filtered_df['Price'] >= min_price_selected)] 
+
 # Filter by Rating
 filtered_df = filtered_df.loc[filtered_df['Rating'] >= rating]
 
@@ -72,9 +86,9 @@ filtered_df = filtered_df.loc[filtered_df['Rating'] >= rating]
 filtered_df = filtered_df.loc[filtered_df['Battery Life'] >= battery_life]
 
 if colours:
-    for colour in colours:
-        colour_column = f'Colour_{colour}'
-        filtered_df = filtered_df[filtered_df[colour_column] == 1]
+    # using np.any to find rows where any of the selected colours match the user input
+    colour_filters = np.any([filtered_df[f'Colour_{colour}'] == 1 for colour in colours],axis=0)
+    filtered_df = filtered_df[colour_filters] 
 
 #-----------------------------------------
 # Get Recommendations
@@ -91,6 +105,12 @@ st.write("0.0 - Recommendations based entirely on average product rating.")
 if st.button("Get Recommendations"):
     recommended_products = hybrid_recommender(df,filtered_df, cosine_sim, alpha)
 
-    st.write("Recommended Products:")
-    st.write(recommended_products)
+    st.markdown("#### Recommended Headphones:")
+
+    # Check if the output is a DataFrame or a string (no products available)
+    if isinstance(recommended_products, pd.DataFrame):
+       # using to_html to make links clickable
+        st.write(recommended_products.to_html(escape=False, index=False), unsafe_allow_html=True)
+    else:
+        st.write(recommended_products)
 
