@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
+
 def hybrid_recommender(df, filtered_df, similarities, alpha=0.6):
     """
     Recommends products based on features (selected by the user) and product ratings.
@@ -39,11 +40,17 @@ def hybrid_recommender(df, filtered_df, similarities, alpha=0.6):
         'Rating': df['Rating']
     })
 
+    #Since I am filtering the dataset its probably best to bring back the first record, so commenting out line below
+    #sim_df = sim_df[sim_df['Product ID'] != product_id]
+
+    # Only keep products that are in the filtered DataFrame
+    sim_df = sim_df[sim_df['Product ID'].isin(filtered_df['Product ID'])]
+    
     # Filter and sort to get the top recommendations
     top_df = sim_df.sort_values(by='Combined Similarity', ascending=False).head(6)
     top_df.reset_index(drop=True, inplace=True)
 
-    # Generate URL for easy access to recommended products
-    top_df['Product URL'] = 'https://www.amazon.com/dp/' + top_df['Product ID']
+    # Adding tags to make link clickable
+    top_df['Product URL'] = '<a href="https://www.amazon.co.uk/dp/' + top_df['Product ID'] + '" target="_blank">'+ top_df['Product ID'] + '</a>'
 
-    return top_df[['Product ID', 'Rating', 'Product URL']][1:]
+    return top_df[['Product ID', 'Rating', 'Product URL']]
