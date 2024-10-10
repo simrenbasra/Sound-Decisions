@@ -49,7 +49,7 @@ To start, clone the repository to your local machine:
 
 ### 4. Get data from Google Drive link
 
-    Navigate to: https://drive.google.com/file/d/1j1Cz1dSsRpJrCYETayH6Z76hmSMMNVyA/view?usp=drive_link and download the data into data folder.
+    Navigate to: https://drive.google.com/file/d/19YhcJcMzh7uzcWrEfkEnAkM5GBhcOG1W/view?usp=sharing and download the data into data folder.
 
 ### 5. Run the Streamlit App 
 
